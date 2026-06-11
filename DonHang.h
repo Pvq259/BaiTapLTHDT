@@ -28,7 +28,7 @@ public:
     void nhap();
     void xuat() const;
 
-    vector<ChiTietDonHang>& getDSChiTiet();
+    vector<ChiTietDonHang>& getDSChiTiet() const;
 };
 
 

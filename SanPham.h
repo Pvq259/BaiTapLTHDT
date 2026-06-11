@@ -12,6 +12,7 @@ private:
     string maSP;
     string tenSP;
     double gia;
+
 public:
     SanPham();
     SanPham(string ma, string ten, double gia);
