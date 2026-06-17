@@ -1,4 +1,4 @@
-#include "QuanLy.h"
+#include "QuanLi.h"
 #include <iostream>
 #include <fstream>
 
@@ -17,22 +17,68 @@ int QuanLy::timSanPham(string ma)
 }
 
 //Thêm Sản Phẩm
-void QuanLy::themSanPham()
-{
+// void QuanLy::themSanPham()
+// {
+    // SanPham sp;
+// 
+    // sp.nhap();
+// 
+    // if(timSanPham(sp.getMaSP()) != -1)
+    // {
+        // cout << "Ma san pham da ton tai!\n";
+        // return;
+    // }
+// 
+    // dsSanPham.push_back(sp);
+// 
+    // cout << "Them thanh cong!\n";
+// }
+
+void QuanLy::themSanPham()(){
     SanPham sp;
-
-    sp.nhap();
-
-    if(timSanPham(sp.getMaSP()) != -1)
-    {
-        cout << "Ma san pham da ton tai!\n";
+    cout << "\n--- Them San Pham ---\n";
+    cin.ignore();
+    cout << "Nhap Ma San Pham: ";
+    getline(cin, sp.maSP());
+    if(timSanPham(sp.maSP)){
+        cout << "Ma Sp da ton tai!" << endl;
         return;
     }
 
-    dsSanPham.push_back(sp);
+    cout << "Ten san pham: ";
+    getline(cin, sp.tenSP);
+    cout << "Nhap gia: ";
+    getline(cin, sp.gia);
 
-    cout << "Them thanh cong!\n";
+
+    if(soLuongSp < MAX_SP){
+        ds_san_pham[soLuongSP++] = sp;
+        
+        ofstream file("SanPham.txt", ios::app);
+        if(file.is_open()){
+            file << "\n" << sp.maSP << "," << sp.tenSP << "," << sp.gia << endl; 
+            file.close();
+        }
+        cout << "Da them san pham vao danh sach thanh cong." << endl;
+    }else{
+        cout << "Danh sach da day! Hay nang cap len Premium de co trai nghiem tot nhat!" << endl;
+    }
+
+
+    char choice;
+    cout << "\nBan co muon them san pham " << sp.tenSP << " vao don hang ngay khong? (Y/N): ";
+    cin >> choice;
+
+
+    while(choice == 'Y' || choice == 'y'){
+        nhapDiem(sv.mssv);
+        cout << "\nBan co muon nhap diem mon khac khong? (Y/N): ";
+        cin >> choice;
+    }
 }
+
+
+
 
 //Hiển thị sản phẩm
 void QuanLy::hienThiSanPham()
@@ -184,10 +230,11 @@ void QuanLy::xoaDonHang()
 
 // Các hàm lưu
 
+
 //Sản Phẩm
 void QuanLy::luuSanPham()
 {
-    ofstream fout("SanPham.dat");
+    ofstream fout("SanPham.txt");
 
     if (!fout)
     {
@@ -240,41 +287,33 @@ void QuanLy::luuDonHang()
 //Sản Phẩm
 void QuanLy::docSanPham()
 {
-    ifstream fin("SanPham.dat");
-
+    ifstream fin("SanPham.txt");
     if (!fin)
         return;
-
     dsSanPham.clear();
-
     int n;
     fin >> n;
     fin.ignore();
-
     for (int i = 0; i < n; i++)
     {
         string ma;
         string ten;
         double gia;
-
         getline(fin, ma);
-        getline(fin, ten);
-
+        getline(fin, ten);   
         fin >> gia;
         fin.ignore();
-
         SanPham sp(ma, ten, gia);
-
         dsSanPham.push_back(sp);
     }
-
     fin.close();
 }
+
 
 //Đơn hàng
 void QuanLy::docDonHang()
 {
-    ifstream fin("DonHang.dat");
+    ifstream fin("DonHang.txt");
     if (!fin)
         return;
 
