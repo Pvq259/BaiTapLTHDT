@@ -34,8 +34,14 @@ public:
     void setMaDH(string ma);
     void setTongTien(double tongTien);
 
-    // Thêm chi tiết đơn hàng
+    // Thêm sản phẩm vào đơn hàng
     void themChiTiet(string maSP, int soLuong);
+
+    // Sửa số lượng sản phẩm
+    bool suaSoLuong(string maSP, int soLuongMoi);
+
+    // Xóa sản phẩm khỏi đơn hàng
+    bool xoaChiTiet(string maSP);
 
     // Nhập xuất
     void nhap();
