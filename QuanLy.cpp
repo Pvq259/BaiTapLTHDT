@@ -323,41 +323,53 @@ void QuanLy::docSanPham()
 
 
 //Đơn hàng
-// void QuanLy::docDonHang()
-// {
-    // ifstream fin("DonHang.txt");
-    // if (!fin)
-        // return;
-// 
-    // dsDonHang.clear();
-    // int soDH;
-    // fin >> soDH;
-    // fin.ignore();
-// 
-    // for (int i = 0; i < soDH; i++)
-    // {
-        // DonHang dh;
-        // string maDH;
-        // getline(fin, maDH);
-        // dh.setMaDH(maDH);
-        // int n;
-        // fin >> n;
-        // fin.ignore();
-        // for (int j = 0; j < n; j++)
-        // {
-            // ChiTietDonHang ct;
-            // getline(fin, ct.maSP);
-            // fin >> ct.soLuong;
-            // fin.ignore();
-            // dh.getDSChiTiet().push_back(ct);
-        // }
-        // dsDonHang.push_back(dh);
-    // }
-// 
-    // fin.close();
-// }
-// 
+void QuanLy::docDonHang()
+{
+    ifstream fin("DonHang.dat");
 
+    if (!fin)
+        return;
+
+    dsDonHang.clear();
+
+    int soDH;
+
+    fin >> soDH;
+    fin.ignore();
+
+    for (int i = 0; i < soDH; i++)
+    {
+        DonHang dh;
+
+        string maDH;
+
+        getline(fin, maDH);
+
+        dh.setMaDH(maDH);
+
+        int n;
+
+        fin >> n;
+        fin.ignore();
+
+        for (int j = 0; j < n; j++)
+        {
+            string maSP;
+            int soLuong;
+
+            getline(fin, maSP);
+
+            fin >> soLuong;
+            fin.ignore();
+
+            dh.themChiTiet(maSP, soLuong);
+        }
+
+        dsDonHang.push_back(dh);
+    }
+
+    fin.close();
+}
 // Hàm sửa dơn hàng
 void QuanLy::suaDonHang()
 {
