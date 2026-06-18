@@ -1,92 +1,51 @@
-#include "DonHang.h"
-#include <iomanip>
+#ifndef DONHANG_H
+#define DONHANG_H
+
+#include <iostream>
+#include <vector>
+#include <string>
 
 using namespace std;
 
-// Hàm mặc định
-DonHang::DonHang()
+// Chi tiết từng sản phẩm trong đơn hàng
+struct ChiTietDonHang
 {
-    maDH = "";
-    tongTien = 0;
-}
+    string maSP;
+    int soLuong;
+};
 
-// Getter
-string DonHang::getMaDH() const
+class DonHang
 {
-    return maDH;
-}
+private:
+    string maDH;
+    vector<ChiTietDonHang> dsChiTiet;
+    double tongTien;
 
-const vector<ChiTietDonHang>& DonHang::getDSChiTiet() const
-{
-    return dsChiTiet;
-}
+public:
+    // Constructor
+    DonHang();
 
-double DonHang::getTongTien() const
-{
-    return tongTien;
-}
+    // Getter
+    string getMaDH() const;
+    const vector<ChiTietDonHang>& getDSChiTiet() const;
+    double getTongTien() const;
 
-// Setter
-void DonHang::setMaDH(string ma)
-{
-    maDH = ma;
-}
+    // Setter
+    void setMaDH(string ma);
+    void setTongTien(double tongTien);
 
-void DonHang::setTongTien(double tongTien)
-{
-    this->tongTien = tongTien;
-}
+    // Thêm sản phẩm vào đơn hàng
+    void themChiTiet(string maSP, int soLuong);
 
-// Thêm chi tiết đơn hàng
-void DonHang::themChiTiet(string maSP, int soLuong)
-{
-    ChiTietDonHang ct;
-    ct.maSP = maSP;
-    ct.soLuong = soLuong;
+    // Sửa số lượng sản phẩm
+    bool suaSoLuong(string maSP, int soLuongMoi);
 
-    dsChiTiet.push_back(ct);  // thêm vào cuối danh sách
-}
+    // Xóa sản phẩm khỏi đơn hàng
+    bool xoaChiTiet(string maSP);
 
-// Nhập đơn hàng
-void DonHang::nhap()
-{
-    cin.ignore();         // xóa kí tự thừa
-    cout << "Nhap ma don hang: ";
-    getline(cin, maDH);       
-    int n;
-    cout << "Nhap so luong san pham trong don hang: ";
-    cin >> n;
+    // Nhập xuất
+    void nhap();
+    void xuat() const;
+};
 
-    dsChiTiet.clear();
-    for (int i = 0; i < n; i++)
-    {
-        ChiTietDonHang ct;
-
-        cout << "\nNhap san pham thu " << i + 1 << endl;
-        cin.ignore();
-        cout << "Nhap ma san pham: ";
-        getline(cin, ct.maSP);
-        cout << "Nhap so luong: ";
-        cin >> ct.soLuong;
-
-        dsChiTiet.push_back(ct);       // thêm vào cuối danh sách
-    }
-}
-
-// Xuất đơn hàng
-void DonHang::xuat() const
-{
-    cout << "\nMa don hang: " << maDH << endl;
-    cout << left
-         << setw(15) << "Ma SP"
-         << setw(10) << "So luong"
-         << endl;
-    for (int i = 0; i < dsChiTiet.size(); i++)
-    {
-        cout << left
-             << setw(15) << dsChiTiet[i].maSP
-             << setw(10) << dsChiTiet[i].soLuong
-             << endl;
-    }
-    cout << "Tong so tien: " << fixed << setprecision(2) << tongTien << endl;
-}
+#endif
