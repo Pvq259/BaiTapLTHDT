@@ -60,7 +60,6 @@ void SanPham::setSoLuong(int soLuong)
 // Nhập thông tin sản phẩm
 void SanPham::nhap()
 {
-    cin.ignore();
     cout << "Nhap ma san pham: ";
     getline(cin, maSP);
     cout << "Nhap ten san pham: ";
