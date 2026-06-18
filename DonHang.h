@@ -12,6 +12,7 @@ struct ChiTietDonHang
 {
     string maSP;
     int soLuong;
+    double tongTien;
 };
 
 class DonHang
@@ -20,7 +21,6 @@ private:
     string maDH;
     vector<ChiTietDonHang> dsChiTiet;
     double tongTien;
-
 public:
     // Constructor
     DonHang();
@@ -42,6 +42,7 @@ public:
 
     // Xóa sản phẩm khỏi đơn hàng
     bool xoaChiTiet(string maSP);
+
 
     // Nhập xuất
     void nhap();

@@ -1,4 +1,5 @@
 #include "DonHang.h"
+#include "SanPham.h"
 #include <iomanip>
 
 using namespace std;
@@ -76,7 +77,7 @@ bool DonHang::xoaChiTiet(string maSP)
     }
 
     return false;
-}
+};
 
 // Nhập đơn hàng
 void DonHang::nhap()
@@ -126,10 +127,4 @@ void DonHang::xuat() const
              << setw(10) << dsChiTiet[i].soLuong
              << endl;
     }
-
-    cout << "Tong tien: "
-         << fixed
-         << setprecision(2)
-         << tongTien
-         << endl;
 }

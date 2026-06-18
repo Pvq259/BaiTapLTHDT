@@ -29,7 +29,7 @@ public:
     int timDonHang(string ma);
 
     bool sanPhamDangDuocSuDung(string maSP);
-
+    double tinhTongTienDonHang(const DonHang& dh);
     // FILE
     void luuSanPham();
     void docSanPham();

@@ -2,7 +2,7 @@
 #include <string>
 #include <fstream>
 using namespace std;
-#include "QuanLi.h"
+#include "QuanLy.h"
 
 int main()
 {

@@ -42,6 +42,7 @@ void QuanLy::themSanPham()
     {
         string maDH;
         int soLuong;
+        double sotien;
 
         cin.ignore();
 
@@ -58,7 +59,7 @@ void QuanLy::themSanPham()
             DonHang dh;
 
             dh.setMaDH(maDH);
-            dh.themChiTiet(sp.getMaSP(), soLuong);
+            dh.themChiTiet(sp.getMaSP(), soLuong );
 
             dsDonHang.push_back(dh);
 
@@ -66,7 +67,7 @@ void QuanLy::themSanPham()
         }
         else
         {
-            dsDonHang[vtDH].themChiTiet(sp.getMaSP(), soLuong);
+            dsDonHang[vtDH].themChiTiet(sp.getMaSP(), soLuong );
 
             cout << "Them vao don hang thanh cong!\n";
         }
@@ -84,7 +85,7 @@ void QuanLy::hienThiSanPham() const
         return;
     }
 
-    cout << "\n=========================================================\n";
+    cout << "\n=======================================================================\n";
 
     cout << left
          << setw(15) << "Ma SP"
@@ -94,7 +95,7 @@ void QuanLy::hienThiSanPham() const
 
     cout << endl;
 
-    cout << "=========================================================\n";
+    cout << "=======================================================================\n";
 
     for (const SanPham& sp : dsSanPham)
     {
@@ -206,15 +207,32 @@ void QuanLy::themDonHang()
 
     cout << "Them thanh cong! " << endl;
 }
+double QuanLy::tinhTongTienDonHang(const DonHang& dh)
+{
+    double tong = 0;
+
+    for (auto ct : dh.getDSChiTiet())
+    {
+        int vt = timSanPham(ct.maSP);
+
+        if (vt != -1)
+        {
+            tong += dsSanPham[vt].getGia() * ct.soLuong;
+        }
+    }
+
+    return tong;
+}
 
 //Hiển thị đơn hàng
 void QuanLy::hienThiDonHang()
 {
     cout << "\n===== DANH SACH DON HANG =====\n";
 
-    for(auto dh : dsDonHang)
+    for(auto dh : dsDonHang) 
     {
         dh.xuat();
+        cout << "Tong tien: "<< fixed << setprecision(2) << tinhTongTienDonHang(dh) << endl;
     }
 }
 
@@ -290,7 +308,6 @@ void QuanLy::luuDonHang()
             fout << ct.soLuong << endl;
         }
     }
-
     fout.close();
 }
 
@@ -358,13 +375,14 @@ void QuanLy::docDonHang()
         {
             string maSP;
             int soLuong;
-
+            double sotien;
             getline(fin, maSP);
 
             fin >> soLuong;
+            fin >>sotien;
             fin.ignore();
 
-            dh.themChiTiet(maSP, soLuong);
+            dh.themChiTiet(maSP, soLuong );
         }
 
         dsDonHang.push_back(dh);
