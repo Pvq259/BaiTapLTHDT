@@ -1,51 +1,135 @@
-#ifndef DONHANG_H
-#define DONHANG_H
-
-#include <iostream>
-#include <vector>
-#include <string>
+#include "DonHang.h"
+#include <iomanip>
 
 using namespace std;
 
-// Chi tiết từng sản phẩm trong đơn hàng
-struct ChiTietDonHang
+// Hàm mặc định
+DonHang::DonHang()
 {
-    string maSP;
-    int soLuong;
-};
+    maDH = "";
+    tongTien = 0;
+}
 
-class DonHang
+// Getter
+string DonHang::getMaDH() const
 {
-private:
-    string maDH;
-    vector<ChiTietDonHang> dsChiTiet;
-    double tongTien;
+    return maDH;
+}
 
-public:
-    // Constructor
-    DonHang();
+const vector<ChiTietDonHang>& DonHang::getDSChiTiet() const
+{
+    return dsChiTiet;
+}
 
-    // Getter
-    string getMaDH() const;
-    const vector<ChiTietDonHang>& getDSChiTiet() const;
-    double getTongTien() const;
+double DonHang::getTongTien() const
+{
+    return tongTien;
+}
 
-    // Setter
-    void setMaDH(string ma);
-    void setTongTien(double tongTien);
+// Setter
+void DonHang::setMaDH(string ma)
+{
+    maDH = ma;
+}
 
-    // Thêm sản phẩm vào đơn hàng
-    void themChiTiet(string maSP, int soLuong);
+void DonHang::setTongTien(double tongTien)
+{
+    this->tongTien = tongTien;
+}
 
-    // Sửa số lượng sản phẩm
-    bool suaSoLuong(string maSP, int soLuongMoi);
+// Thêm chi tiết đơn hàng
+void DonHang::themChiTiet(string maSP, int soLuong)
+{
+    ChiTietDonHang ct;
 
-    // Xóa sản phẩm khỏi đơn hàng
-    bool xoaChiTiet(string maSP);
+    ct.maSP = maSP;
+    ct.soLuong = soLuong;
 
-    // Nhập xuất
-    void nhap();
-    void xuat() const;
-};
+    dsChiTiet.push_back(ct);
+}
 
-#endif
+// Sửa số lượng sản phẩm
+bool DonHang::suaSoLuong(string maSP, int soLuongMoi)
+{
+    for (int i = 0; i < dsChiTiet.size(); i++)
+    {
+        if (dsChiTiet[i].maSP == maSP)
+        {
+            dsChiTiet[i].soLuong = soLuongMoi;
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// Xóa sản phẩm khỏi đơn hàng
+bool DonHang::xoaChiTiet(string maSP)
+{
+    for (int i = 0; i < dsChiTiet.size(); i++)
+    {
+        if (dsChiTiet[i].maSP == maSP)
+        {
+            dsChiTiet.erase(dsChiTiet.begin() + i);
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// Nhập đơn hàng
+void DonHang::nhap()
+{
+    cout << "Nhap ma don hang: ";
+    getline(cin, maDH);
+
+    int n;
+
+    cout << "Nhap so luong san pham trong don hang: ";
+    cin >> n;
+
+    dsChiTiet.clear();
+
+    for (int i = 0; i < n; i++)
+    {
+        ChiTietDonHang ct;
+
+        cin.ignore();
+
+        cout << "\nNhap san pham thu " << i + 1 << endl;
+
+        cout << "Nhap ma san pham: ";
+        getline(cin, ct.maSP);
+
+        cout << "Nhap so luong: ";
+        cin >> ct.soLuong;
+
+        dsChiTiet.push_back(ct);
+    }
+}
+
+// Xuất đơn hàng
+void DonHang::xuat() const
+{
+    cout << "\nMa don hang: " << maDH << endl;
+
+    cout << left
+         << setw(15) << "Ma SP"
+         << setw(10) << "So luong"
+         << endl;
+
+    for (int i = 0; i < dsChiTiet.size(); i++)
+    {
+        cout << left
+             << setw(15) << dsChiTiet[i].maSP
+             << setw(10) << dsChiTiet[i].soLuong
+             << endl;
+    }
+
+    cout << "Tong tien: "
+         << fixed
+         << setprecision(2)
+         << tongTien
+         << endl;
+}
