@@ -412,7 +412,6 @@ void QuanLy::menu()
             cout << "6. Hien thi don hang\n";
             cout << "7. Sua don hang\n";
             cout << "8. Xoa don hang\n";
-            cout << "9. Luu du lieu\n";
             cout << "0. Thoat\n";
 
             cout << "Nhap lua chon : ";
@@ -449,11 +448,6 @@ void QuanLy::menu()
                 break;
             case 8:
                 xoaDonHang();
-                break;
-            case 9:
-                luuSanPham();
-                luuDonHang();
-                cout << "Da luu!\n";
                 break;
             case 0:
                 luuSanPham();
