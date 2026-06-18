@@ -76,7 +76,7 @@ void QuanLy::themSanPham()
 
 
 //Hiển thị sản phẩm
-void QuanLy::hienThiSanPham()
+void QuanLy::hienThiSanPham() const
 {
     if (dsSanPham.empty())
     {
