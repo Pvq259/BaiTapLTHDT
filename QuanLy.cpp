@@ -260,6 +260,7 @@ void QuanLy::luuSanPham()
         fout << sp.getMaSP() << endl;
         fout << sp.getTenSP() << endl;
         fout << sp.getGia() << endl;
+        fout << sp.getSoLuong() << endl;
     }
 
     fout.close();
@@ -314,6 +315,7 @@ void QuanLy::docSanPham()
         getline(fin, ma);
         getline(fin, ten);   
         fin >> gia;
+        fin >> sl;
         fin.ignore();
         SanPham sp(ma, ten, gia,sl);
         dsSanPham.push_back(sp);
