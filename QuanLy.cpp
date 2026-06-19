@@ -559,7 +559,7 @@ void QuanLy::menu()
             case 8:
                 hienThiDonHang();
                 break;
-            case 7:
+            case 5:
                 suaDonHang();
                 break;
             case 6:
