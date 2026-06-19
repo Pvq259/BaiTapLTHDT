@@ -423,13 +423,13 @@ void QuanLy::menu()
         {
             cout << "\n========== MENU ==========\n";
             cout << "1. Them san pham\n";
-            cout << "2. Hien thi san pham\n";
-            cout << "3. Sua san pham\n";
-            cout << "4. Xoa san pham\n";
-            cout << "5. Them don hang\n";
-            cout << "6. Hien thi don hang\n";
-            cout << "7. Sua don hang\n";
-            cout << "8. Xoa don hang\n";
+            cout << "2. Sua san pham\n";
+            cout << "3. Xoa 1 san pham\n";
+            cout << "4. Nhap thong tin don hang\n";
+            cout << "5. Sua thong tin don hang\n";
+            cout << "6. Xoa don hang\n";
+            cout << "7. Liet ke san pham \n";
+            cout << "8. Liet ke don hang\n";
             cout << "0. Thoat\n";
 
             cout << "Nhap lua chon : ";
@@ -446,25 +446,25 @@ void QuanLy::menu()
             case 1:
                 themSanPham();
                 break;
-            case 2:
+            case 7:
                 hienThiSanPham();
                 break;
-            case 3:
+            case 2:
                 suaSanPham();
                 break;
-            case 4:
+            case 3:
                 xoaSanPham();
                 break;
-            case 5:
+            case 4:
                 themDonHang();
                 break;
-            case 6:
+            case 8:
                 hienThiDonHang();
                 break;
             case 7:
                 suaDonHang();
                 break;
-            case 8:
+            case 6:
                 xoaDonHang();
                 break;
             case 0:
