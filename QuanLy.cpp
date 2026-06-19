@@ -393,20 +393,118 @@ void QuanLy::docDonHang()
 // Hàm sửa dơn hàng
 void QuanLy::suaDonHang()
 {
-    string ma;
-    cout << "Nhap ma don hang: ";
-    getline(cin, ma);
-    int vt = timDonHang(ma);
-    if (vt == -1)        
+    string maDH;
+    cout << "Nhap ma don hang can sua: ";
+    getline(cin, maDH);
+
+    int vtDH = timDonHang(maDH);
+
+    if (vtDH == -1)
     {
-        cout << "Khong tim thay!\n";
+        cout << "Khong tim thay don hang!\n";
         return;
     }
-    DonHang moi;
-    cout << "Nhap lai thong tin:\n";
-    moi.nhap();
-    dsDonHang[vt] = moi;
-    cout << "Cap nhat thanh cong!\n";
+
+    char chon;
+
+    do
+    {
+        cout << "\n===== SUA DON HANG =====\n";
+        cout << "a. Them mot san pham vao don hang\n";
+        cout << "b. Sua so luong san pham\n";
+        cout << "c. Xoa san pham khoi don hang\n";
+        cout << "d. Thoat\n";
+
+        cout << "Nhap lua chon: ";
+        cin >> chon;
+        cin.ignore();
+
+        switch (chon)
+        {
+        case 'a':
+        case 'A':
+        {
+            string maSP;
+            int soLuong;
+
+            cout << "Nhap ma san pham: ";
+            getline(cin, maSP);
+
+            if (timSanPham(maSP) == -1)
+            {
+                cout << "San pham khong ton tai!\n";
+                break;
+            }
+
+            cout << "Nhap so luong: ";
+            cin >> soLuong;
+            cin.ignore();
+
+            dsDonHang[vtDH].themChiTiet(maSP, soLuong);
+
+            cout << "Them san pham thanh cong!\n";
+            luuDonHang();
+
+            break;
+        }
+
+        case 'b':
+        case 'B':
+        {
+            string maSP;
+            int soLuongMoi;
+
+            cout << "Nhap ma san pham can sua: ";
+            getline(cin, maSP);
+
+            cout << "Nhap so luong moi: ";
+            cin >> soLuongMoi;
+            cin.ignore();
+
+            if (dsDonHang[vtDH].suaSoLuong(maSP, soLuongMoi))
+            {
+                cout << "Cap nhat thanh cong!\n";
+                luuDonHang();
+            }
+            else
+            {
+                cout << "Khong tim thay san pham trong don hang!\n";
+            }
+
+            break;
+        }
+
+        case 'c':
+        case 'C':
+        {
+            string maSP;
+
+            cout << "Nhap ma san pham can xoa: ";
+            getline(cin, maSP);
+
+            if (dsDonHang[vtDH].xoaChiTiet(maSP))
+            {
+                cout << "Xoa thanh cong!\n";
+                luuDonHang();
+            }
+            else
+            {
+                cout << "Khong tim thay san pham trong don hang!\n";
+            }
+
+            break;
+        }
+
+        case 'd':
+        case 'D':
+            cout << "Thoat sua don hang!\n";
+            break;
+
+        default:
+            cout << "Lua chon khong hop le!\n";
+        }
+
+    } while (chon != 'd' && chon != 'D');
 }
 
 
