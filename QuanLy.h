@@ -13,6 +13,7 @@ private:
 
 public:
     void menu();
+    void menucon();
 
     // SAN PHAM
     void themSanPham();
